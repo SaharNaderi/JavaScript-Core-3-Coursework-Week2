@@ -16,15 +16,19 @@ Expected result
 Open index.html in your browser. Every time you refresh the page,
 a different greeting should be displayed in the box.
 */
-
-fetch("https://codeyourfuture.herokuapp.com/api/greetings")
-  .then(function (response) {
-    return response.text();
-  })
-  .then(function (greeting) {
-    // Write the code to display the greeting text here
-  let greetingText = document.getElementById("greeting-text");
-    greetingText.innerText = greeting;
+const clickButton = document.getElementById("clickBtn");
+clickButton.addEventListener("click", () => {
+  return fetch("https://dog.ceo/api/breeds/image/random")
+    .then(function (response) {
+      return response.json();
     })
-  .catch((error) => console.log(error))
-
+    .then(function (image) {
+      let list = document.getElementById("imageList");
+      let imgLi = document.createElement("li");
+      list.appendChild(imgLi);
+      let img = document.createElement("img");
+      imgLi.appendChild(img);
+      img.src = image.message;
+    })
+    .catch((error) => console.log(error));
+});
